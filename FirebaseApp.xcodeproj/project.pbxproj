@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		6CC5F2792DED97B700C1A701 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 6CC5F2782DED97B700C1A701 /* FirebaseAuth */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		6CC5F25F2DED96E100C1A701 /* FirebaseApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirebaseApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CC5F2792DED97B700C1A701 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = FirebaseApp;
 			packageProductDependencies = (
+				6CC5F2782DED97B700C1A701 /* FirebaseAuth */,
 			);
 			productName = FirebaseApp;
 			productReference = 6CC5F25F2DED96E100C1A701 /* FirebaseApp.app */;
@@ -107,6 +113,9 @@
 			);
 			mainGroup = 6CC5F2562DED96E100C1A701;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				6CC5F2772DED97B700C1A701 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 6CC5F2602DED96E100C1A701 /* Products */;
 			projectDirPath = "";
@@ -333,6 +342,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6CC5F2772DED97B700C1A701 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.13.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6CC5F2782DED97B700C1A701 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6CC5F2772DED97B700C1A701 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6CC5F2572DED96E100C1A701 /* Project object */;
 }
