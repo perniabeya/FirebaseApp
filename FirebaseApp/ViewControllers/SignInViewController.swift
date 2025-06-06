@@ -9,13 +9,13 @@ import UIKit
 import FirebaseCore
 import FirebaseAuth
 import GoogleSignIn
+import FirebaseFirestore
 
 class SignInViewController: UIViewController {
     
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -76,9 +76,54 @@ class SignInViewController: UIViewController {
                     // Todo correcto
                     print("User signs in successfully")
                     
-                    goToHome()
+                    // At this point, our user is signed in
+                    Task {
+                        await self.createUser(googleUser: user)
+                        
+                        DispatchQueue.main.async {
+                            self.goToHome()
+                        }
+                    }
                 }
             }
+        }
+    }
+    
+    func createUser(googleUser: GIDGoogleUser) async {
+        let userID = Auth.auth().currentUser!.uid
+        
+        let db = Firestore.firestore()
+        
+        let docRef = db.collection("Users").document(userID)
+        
+        do {
+            let document = try await docRef.getDocument()
+            if !document.exists {
+                let username = googleUser.profile!.email
+                let firstName = googleUser.profile!.givenName ?? googleUser.profile!.name
+                let lastName = googleUser.profile!.familyName ?? ""
+                //let birthday = nil
+                let gender = Gender.unspecified
+                let profileImageUrl = googleUser.profile!.hasImage ? googleUser.profile!.imageURL(withDimension: 200) : nil
+                
+                let user = User(id: userID, username: username, firstName: firstName, lastName: lastName, gender: gender, birthday: nil, provider: .google, profileImageUrl: profileImageUrl?.absoluteString)
+                
+                do {
+                    try db.collection("Users").document(userID).setData(from: user)
+                } catch let error {
+                    print("Error writing user to Firestore: \(error)")
+                    
+                    let alertController = UIAlertController(title: "Create user", message: error.localizedDescription, preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .default))
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            }
+        } catch {
+            print("Error getting document: \(error)")
+            
+            let alertController = UIAlertController(title: "Create user", message: error.localizedDescription, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(alertController, animated: true, completion: nil)
         }
     }
     

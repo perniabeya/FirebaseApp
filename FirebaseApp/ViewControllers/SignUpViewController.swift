@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseFirestore
 
 class SignUpViewController: UIViewController {
     
@@ -77,11 +78,44 @@ class SignUpViewController: UIViewController {
                     // Todo correcto
                     print("User signs up successfully")
                     
-                    let alertController = UIAlertController(title: "Create user", message: "User signs up successfully", preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "OK", style: .default))
-                    self.present(alertController, animated: true, completion: nil)
+                    createUser()
                 }
             }
+        }
+    }
+    
+    func createUser() {
+        let userID = Auth.auth().currentUser!.uid
+        let username = usernameTextField.text!
+        let password = passwordTextField.text!
+        let firstName = firstNameTextField.text!
+        let lastName = lastNameTextField.text!
+        let birthday = birthdayDatePicker.date
+        let gender = switch genderSegmentedControl.selectedSegmentIndex {
+        case 0:
+            Gender.male
+        case 1:
+            Gender.female
+        default:
+            Gender.other
+        }
+        
+        let user = User(id: userID, username: username, firstName: firstName, lastName: lastName, gender: gender, birthday: birthday, provider: .basic)
+        
+        do {
+            let db = Firestore.firestore()
+            
+            try db.collection("Users").document(userID).setData(from: user)
+            
+            let alertController = UIAlertController(title: "Create user", message: "User signs up successfully", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(alertController, animated: true, completion: nil)
+        } catch let error {
+            print("Error writing user to Firestore: \(error)")
+            
+            let alertController = UIAlertController(title: "Create user", message: error.localizedDescription, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(alertController, animated: true, completion: nil)
         }
     }
 
