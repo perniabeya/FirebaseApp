@@ -1,15 +1,14 @@
 //
-//  HomeViewController.swift
+//  SettingsViewController.swift
 //  FirebaseApp
 //
-//  Created by Mañanas on 2/6/25.
+//  Created by Mañanas on 6/6/25.
 //
 
 import UIKit
 import FirebaseAuth
-import FirebaseFirestore
 
-class HomeViewController: UIViewController {
+class SettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,6 +16,16 @@ class HomeViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func signOut(_ sender: Any) {
+        do {
+          try Auth.auth().signOut()
+        } catch let signOutError as NSError {
+          print("Error signing out: %@", signOutError)
+        }
+        self.navigationController?.navigationController?.popToRootViewController(animated: true)
+    }
+    
+
     /*
     // MARK: - Navigation
 

@@ -19,6 +19,10 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        if (Auth.auth().currentUser != nil) {
+            goToHome()
+        }
     }
     
     @IBAction func signIn(_ sender: Any) {
