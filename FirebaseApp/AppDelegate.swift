@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  FirebaseApp
 //
-//  Created by Mañanas on 2/6/25.
+//  Created by Mañanas on 10/6/25.
 //
 
 import UIKit
