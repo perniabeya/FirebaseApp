@@ -516,11 +516,33 @@
                         <viewLayoutGuide key="safeArea" id="PGG-U7-i1p"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Home" id="gGF-3T-0HR"/>
+                    <navigationItem key="navigationItem" title="Home" id="gGF-3T-0HR">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="hwJ-i9-7iT">
+                            <connections>
+                                <segue destination="VH3-4f-sgG" kind="show" id="bLv-CY-KFc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FXg-3v-6RW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="891" y="2217"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="JlF-5K-tJF">
+            <objects>
+                <viewController id="VH3-4f-sgG" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZB7-kY-kBq">
+                        <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="CPq-bt-ITQ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="jyo-2h-3Ew"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wR8-p1-RVd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="891" y="2959"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="JbI-SS-zfk">
@@ -610,6 +632,7 @@
         <image name="logo-placeholder" width="200" height="200"/>
         <image name="person" catalog="system" width="128" height="121"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
